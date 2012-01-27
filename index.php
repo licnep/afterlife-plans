@@ -1,1 +1,1 @@
-<?php header('location: frontend/default/index.php') ?>
+<?php header('location: frontend/plain/index.php') ?>

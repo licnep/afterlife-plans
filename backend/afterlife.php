@@ -1,10 +1,19 @@
 <?php
 
-/*****
-CONFIGURATION: (edit these variables for your setup)
-******/
+/***********************************************************
+BEGIN CONFIGURATION: (edit these variables for your setup)
+************************************************************/
 $__PASSWORD="password";
-$__FAILSAFE_PERIOD= 48*60*60; //this is in seconds, default is 48h
+$__FAILSAFE_PERIOD= 10;//48*60*60; //this is in seconds, default is 48h
+
+function warn_me_cause_somebody_thinks_im_dead() {
+	//edit this function to warn you properly. In this example it sends an email
+	mail("something@gmail.com","WARNING: someone thinks you're dead","if you're not you have 48h to confirm");
+}
+
+/***********************************************************
+END CONFIGURATION
+************************************************************/
 
 
 /**
@@ -30,7 +39,6 @@ function dead_man_switch($password,$state) {
 	$timestamp_last_on_txt = file_get_contents(dirname(__FILE__).'/timestamp_last_on.txt'); 
 	if (!$timestamp_last_on_txt) return("CAN'T OPEN THE FILE. FIX THE PERMISSIONS OR NOTHING WILL HAPPEN WHEN YOU DIE.");
 	$timestamp_last_on = intval($timestamp_last_on_txt);
-
 	//the password is required for any operation:
 	if ($password!=$GLOBALS['__PASSWORD']) return("WRONG PASSWORD");
 
@@ -39,6 +47,7 @@ function dead_man_switch($password,$state) {
 	    if ($timestamp_last_on==-1) {
 			$success = file_put_contents(dirname(__FILE__).'/timestamp_last_on.txt',time()); //update the timestamp
 			if (!$success) {return("CANNOT WRITE TO FILE. FIX PERMISSIONS NOW.");}
+			warn_me_cause_somebody_thinks_im_dead();
 			return("FAILSAFE PERIOD STARTED, COME BACK LATER");	
 		} else {
 			//CASE 2:
@@ -48,9 +57,7 @@ function dead_man_switch($password,$state) {
 				//oh shit, you're actually dead :( i'm sorry, it's been great knowing you
 				//humanity will not forget your contribution, but now let's get this shit started.
 				//A great person deserves a great finale
-	
-				//TODO: run the actual script here
-				return("FIREWORKS MAN!");
+				return(exec(dirname(__FILE__)."/last_act/dont_run_me.sh"));
 			} else {
 				//48h have not yet passed since the button was first pressed
 				return("FAILSAFE PERIOD HAS NOT YET EXPIRED");
@@ -64,4 +71,11 @@ function dead_man_switch($password,$state) {
 		return("PHFEEEW");
 	}
 }
+
+function dead_man_timestamp() {
+	$timestamp_last_on_txt = file_get_contents(dirname(__FILE__).'/timestamp_last_on.txt'); 
+	if (!$timestamp_last_on_txt) return("CAN'T OPEN THE FILE. FIX THE PERMISSIONS OR NOTHING WILL HAPPEN WHEN YOU DIE.");
+	return intval($timestamp_last_on_txt);
+}
+
 ?>
