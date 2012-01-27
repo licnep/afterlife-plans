@@ -1,2 +1,2 @@
 #!/bin/bash
-echo deeeeeeeeed
+echo you deeeeeeeeed
