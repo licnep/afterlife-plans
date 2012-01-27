@@ -7,13 +7,6 @@ $__PASSWORD="password";
 $__FAILSAFE_PERIOD= 48*60*60; //this is in seconds, default is 48h
 
 
-
-
-echo dead_man_switch("password","ON");
-
-
-
-
 /**
 state=="ON":
   someone is trying to activate the dead_man_switch, here's how we react:
@@ -34,16 +27,17 @@ function dead_man_switch($password,$state) {
 
 	//after the first push of the button we set this to the current timestamp
 	//if the user is alive and switches the thing off it is set to -1 again
-	$timestamp_last_on = intval(file_get_contents('./timestamp_last_on.txt')); 
-	if (!$timestamp_last_on) return("CAN'T OPEN THE FILE. FIX THE PERMISSIONS OR NOTHING WILL HAPPEN WHEN YOU DIE.");
+	$timestamp_last_on_txt = file_get_contents(dirname(__FILE__).'/timestamp_last_on.txt'); 
+	if (!$timestamp_last_on_txt) return("CAN'T OPEN THE FILE. FIX THE PERMISSIONS OR NOTHING WILL HAPPEN WHEN YOU DIE.");
+	$timestamp_last_on = intval($timestamp_last_on_txt);
 
 	//the password is required for any operation:
-	if ($password!=$GLOBALS['__PASSWORD']) return;
+	if ($password!=$GLOBALS['__PASSWORD']) return("WRONG PASSWORD");
 
 	if ($state=="ON") {
 	    //CASE 1: it's the first time the button has been pressed (maybe a joke)
 	    if ($timestamp_last_on==-1) {
-			$success = file_put_contents('./timestamp_last_on.txt',time()); //update the timestamp
+			$success = file_put_contents(dirname(__FILE__).'/timestamp_last_on.txt',time()); //update the timestamp
 			if (!$success) {return("CANNOT WRITE TO FILE. FIX PERMISSIONS NOW.");}
 			return("FAILSAFE PERIOD STARTED, COME BACK LATER");	
 		} else {
@@ -65,7 +59,7 @@ function dead_man_switch($password,$state) {
 	}
 	if ($state=="OFF") {
 		//pfheew you're not dead yet, that was close
-		$success = file_put_contents('./timestamp_last_on.txt','-1'); //back to normal, DEFCON 5
+		$success = file_put_contents(dirname(__FILE__).'/timestamp_last_on.txt','-1'); //back to normal, DEFCON 5
 		if (!$success) {return("CANNOT WRITE TO FILE. FIX PERMISSIONS NOW.");}
 		return("PHFEEEW");
 	}
