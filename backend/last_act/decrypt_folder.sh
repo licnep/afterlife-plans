@@ -16,7 +16,7 @@ fi
 
 
 #decrypt the archived folder
-echo $2 | gpg --passphrase-fd 0 $1
+echo $2 | gpg --batch --passphrase-fd 0 $1
 
 
 #now we should have a temp_archive.tar, so we unzip it and run the run.sh
