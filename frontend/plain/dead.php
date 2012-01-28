@@ -1,7 +1,22 @@
 <?php
+include(dirname(__FILE__).'/config.php');
+
 if (isset($_GET['password'])) {
 	require_once(dirname(__FILE__).'/../../backend/afterlife.php');
-	$__message = dead_man_switch($_GET['password'],"ON");
+	$__message = dead_man_switch($_GET['password'],"ON") . "<br/><br/>";
+}
+
+if ( dead_man_timestamp()==-1 ) {
+	//switch not yet activated
+	$__message .= $GLOBALS['DEAD_MESSAGE_MAIN'];
+} else {
+	if (time()<when_can_i_confirm()) {
+		//we're in the failsafe period
+		$__message .= $GLOBALS['FILESAFE_PERIOD_MESSAGE'];		
+	} else {
+		//failsafe period ended. We can now finally confirm the death
+		$__message .= $GLOBALS['YOU_CAN_NOW_CONFIRM_MESSAGE'];		
+	}
 }
 ?>
 <html>
@@ -11,9 +26,7 @@ if (isset($_GET['password'])) {
 			<input type="submit" />
 		</form>
 		<div id="message">
-			<pre>
 			<?php echo($__message); ?>
-			</pre>
 		</div>
 	</body>
 </html>
