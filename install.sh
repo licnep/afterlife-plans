@@ -3,9 +3,11 @@
 echo "====================================================="
 echo "INSTRUCTIONS:"
 echo "====================================================="
-echo "Substitute the default script in backend/last_act/pandoras_box/dont_run_me.sh with your own."
+echo "Setup your own personal pandoras_box folder"
+echo "(follow the instructions in pandoras_box/instructions)"
+echo "(For a first test run you can just use the default one)"
 echo ""
-echo "Is your custom script in place already (y/n)?"
+echo "Is your pandoras_box folder ready (y/n)?"
 read answer
 
 if [ "$answer" != "y" ]
@@ -16,12 +18,12 @@ fi
 #changing permissions
 chmod a+rw backend/timestamp_last_on.txt
 echo "-1" > backend/timestamp_last_on.txt #reset the timestamp
-chmod a+x backend/last_act/encrypt_folder.sh
-chmod a+x backend/last_act/decrypt_folder.sh
-chmod a+x backend/last_act/modules/irc_message.sh
-chmod a+x backend/last_act/modules/send_email.sh
-chmod a+x backend/last_act/pandoras_box/dont_run_me.sh
-chmod a+w backend/last_act/
+chmod a+x backend/encrypt_folder.sh
+chmod a+x backend/decrypt_folder.sh
+chmod a+x pandoras_box/modules/irc_message.sh
+chmod a+x pandoras_box/modules/send_email.sh
+chmod a+x pandoras_box/dont_run_me.sh
+chmod a+w decrypted/
 
 
 
@@ -62,7 +64,6 @@ echo "Email saved in backend/config.php"
 
 echo "====================================================="
 echo "Now open backend/config.php to refine the configuration"
-echo "(MANDATORY)"
 echo "Have you edited backend/config.php to suit your needs (y/n)?"
 read answer
 if [ "$answer" != "y" ]
@@ -72,12 +73,12 @@ fi
 
 #encrypting the folder
 echo "Encripting the folder..."
-cd backend/last_act/
-./encrypt_folder.sh pandoras_box "$password1" "$password1"
-cd ../..
+cd backend/
+./encrypt_folder.sh ../pandoras_box "$password1" "$password1"
+cd ..
 
 echo "====================================================="
 echo "Installation succesfull!!!"
 echo "====================================================="
-echo "Now you can remove the folder /backend/last-act/pandoras_box"
+echo "Now you can delete the pandoras_box folder"
 echo "Be sure to configure the frontend as well."
