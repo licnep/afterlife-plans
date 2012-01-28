@@ -1,19 +1,5 @@
 <?php
-
-/***********************************************************
-BEGIN CONFIGURATION: (edit these variables for your setup)
-************************************************************/
-$__PASSWORD="hash";
-$__FAILSAFE_PERIOD= 10;//48*60*60; //this is in seconds, default is 48h
-
-function warn_me_cause_somebody_thinks_im_dead() {
-	//edit this function to warn you properly. In this example it sends an email
-	mail("something@gmail.com","WARNING: someone thinks you're dead","if you're not you have 48h to confirm");
-}
-
-/***********************************************************
-END CONFIGURATION
-************************************************************/
+include(dirname(__FILE__).'config.php');
 
 
 /**
@@ -74,10 +60,16 @@ function dead_man_switch($password,$state) {
 	}
 }
 
+//this returns the unix timestamp of when the button was first pressed
 function dead_man_timestamp() {
 	$timestamp_last_on_txt = file_get_contents(dirname(__FILE__).'/timestamp_last_on.txt'); 
 	if (!$timestamp_last_on_txt) return("CAN'T OPEN THE FILE. FIX THE PERMISSIONS OR NOTHING WILL HAPPEN WHEN YOU DIE.");
 	return intval($timestamp_last_on_txt);
+}
+
+//returns the unix timestamp of when the button can be pressed again for the definitive confirmation
+function when_can_i_confirm() {
+	return dead_man_timestamp()+$GLOBALS['__FAILSAFE_PERIOD'];
 }
 
 ?>

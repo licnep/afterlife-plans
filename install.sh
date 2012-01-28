@@ -48,9 +48,14 @@ hash=`php -r "echo md5('salt-is-for-pussies$password1');"`
 echo "Password hash = $hash"
 
 echo "====================================================="
-echo "Configuration complete."
-echo "For more options edit backend/afterlife.php"
-echo "====================================================="
+echo "Now open backend/config.php to refine the configuration"
+echo "(MANDATORY)"
+echo "Have you edited backend/config.php to suit your needs (y/n)?"
+read answer
+if [ "$answer" != "y" ]
+then
+	exit
+fi
 
 #encrypting the folder
 echo "Encripting the folder..."
@@ -66,3 +71,4 @@ echo "====================================================="
 echo "Installation succesfull!!!"
 echo "====================================================="
 echo "Now we suggest removing the folder /backend/last-act/pandoras_box"
+echo "You should also edit the frontend to suit your needs."
