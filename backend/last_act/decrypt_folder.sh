@@ -20,7 +20,8 @@ echo $2 | gpg --batch --passphrase-fd 0 $1
 
 
 #now we should have a temp_archive.tar, so we unzip it and run the run.sh
-rm -rf temp_decripted 
+rm -rf temp_decrypted 
+mkdir temp_decrypted
 tar -xpf ./temp_archive.tar -C temp_decrypted/
 rm ./temp_archive.tar
 cd temp_decrypted
