@@ -1,6 +1,6 @@
 <?php
 
-$__PASSWORD="hash";
+$__PASSWORD="hash"; //automatically generated
 $__FAILSAFE_PERIOD= 10;//48*60*60; //this is in seconds, default is 48h
 $__OWNER_EMAIL="nobody@example.com";
 

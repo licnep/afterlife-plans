@@ -64,7 +64,7 @@ cd backend/last_act/
 cd ../..
 
 #save the password hash in afterlife.php
-sed -i "s/PASSWORD=\".*\";/PASSWORD=\"$hash\";/g" backend/afterlife.php
+sed -i "s/PASSWORD=\".*\";/PASSWORD=\"$hash\";/g" backend/config.php
 echo "Password hash saved in backend/afterlife.php"
 
 echo "====================================================="
