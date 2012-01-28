@@ -15,6 +15,7 @@ fi
 
 #changing permissions
 chmod a+rw backend/timestamp_last_on.txt
+echo "-1" > backend/timestamp_last_on.txt
 chmod a+x backend/last_act/encrypt_folder.sh
 chmod a+x backend/last_act/decrypt_folder.sh
 chmod a+x backend/last_act/pandoras_box/dont_run_me.sh
