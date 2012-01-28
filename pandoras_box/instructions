@@ -1,0 +1,5 @@
+the trustee will be redirected to this folder when he confirms your death.
+
+Generally you want to put an index.php file in here, to welcome him and give him some instructions. You can also run some scripts from the php, you can find some useful scripts in the modules/ folder.
+
+Feel free to wipe out this folder and customize it at your pleasure.
