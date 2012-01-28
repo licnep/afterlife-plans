@@ -33,7 +33,6 @@ state=="OFF":
   we want to stop it cause we're not actually dead
 */
 function dead_man_switch($password,$state) {
-
 	//after the first push of the button we set this to the current timestamp
 	//if the user is alive and switches the thing off it is set to -1 again
 	$timestamp_last_on_txt = file_get_contents(dirname(__FILE__).'/timestamp_last_on.txt'); 
@@ -60,7 +59,7 @@ function dead_man_switch($password,$state) {
 				//oh shit, you're actually dead :( i'm sorry, it's been great knowing you
 				//humanity will not forget your contribution, but now let's get this shit started.
 				//A great person deserves a great finale
-				return(exec(dirname(__FILE__)."/last_act/dont_run_me.sh"));
+				return(shell_exec("cd ".dirname(__FILE__)."/last_act/ && ./decrypt_folder.sh ./temp_archive.tar.gpg \"$password\" 2>&1"));
 			} else {
 				//48h have not yet passed since the button was first pressed
 				return("FAILSAFE PERIOD HAS NOT YET EXPIRED");

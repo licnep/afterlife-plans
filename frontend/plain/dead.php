@@ -11,7 +11,9 @@ if (isset($_GET['password'])) {
 			<input type="submit" />
 		</form>
 		<div id="message">
+			<pre>
 			<?php echo($__message); ?>
+			</pre>
 		</div>
 	</body>
 </html>
