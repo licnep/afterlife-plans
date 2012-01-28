@@ -47,6 +47,17 @@ done
 hash=`php -r "echo md5('salt-is-for-pussies$password1');"`
 echo "Password hash = $hash"
 
+#save the password hash in afterlife.php
+sed -i "s/PASSWORD=\".*\";/PASSWORD=\"$hash\";/g" backend/config.php
+echo "Password hash saved in backend/config.php"
+
+echo -ne "Enter your email:"
+read email
+
+sed -i "s/__OWNER_EMAIL=\".*\";/__OWNER_EMAIL=\"$email\";/g" backend/config.php
+echo "Email saved in backend/config.php"
+
+
 echo "====================================================="
 echo "Now open backend/config.php to refine the configuration"
 echo "(MANDATORY)"
@@ -62,10 +73,6 @@ echo "Encripting the folder..."
 cd backend/last_act/
 ./encrypt_folder.sh pandoras_box "$password1" "$password1"
 cd ../..
-
-#save the password hash in afterlife.php
-sed -i "s/PASSWORD=\".*\";/PASSWORD=\"$hash\";/g" backend/config.php
-echo "Password hash saved in backend/config.php"
 
 echo "====================================================="
 echo "Installation succesfull!!!"
