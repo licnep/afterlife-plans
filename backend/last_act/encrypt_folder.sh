@@ -25,7 +25,7 @@ then
 fi
 
 #archive the folder
-tar -cf temp_archive.tar $1
+tar -pcf temp_archive.tar $1
 
 
 #crypt the archived folder

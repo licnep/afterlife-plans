@@ -8,7 +8,7 @@ If the fail safe period has ended without you cancelling the procedure, then the
 
 Installation:
 =============
-Open install.php and follow the instructions.
+Run install.sh and follow the instructions.
 
 Requirements:
 =============

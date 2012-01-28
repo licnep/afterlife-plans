@@ -3,7 +3,7 @@
 /***********************************************************
 BEGIN CONFIGURATION: (edit these variables for your setup)
 ************************************************************/
-$__PASSWORD="password";
+$__PASSWORD="hash";
 $__FAILSAFE_PERIOD= 10;//48*60*60; //this is in seconds, default is 48h
 
 function warn_me_cause_somebody_thinks_im_dead() {
@@ -39,8 +39,11 @@ function dead_man_switch($password,$state) {
 	$timestamp_last_on_txt = file_get_contents(dirname(__FILE__).'/timestamp_last_on.txt'); 
 	if (!$timestamp_last_on_txt) return("CAN'T OPEN THE FILE. FIX THE PERMISSIONS OR NOTHING WILL HAPPEN WHEN YOU DIE.");
 	$timestamp_last_on = intval($timestamp_last_on_txt);
+
+
 	//the password is required for any operation:
-	if ($password!=$GLOBALS['__PASSWORD']) return("WRONG PASSWORD");
+	$hash = md5('salt-is-for-pussies'.$password);
+	if ($hash!=$GLOBALS['__PASSWORD']) return("WRONG PASSWORD");
 
 	if ($state=="ON") {
 	    //CASE 1: it's the first time the button has been pressed (maybe a joke)
