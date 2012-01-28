@@ -45,7 +45,7 @@ function dead_man_switch($password,$state) {
 				//oh shit, you're actually dead :( i'm sorry, it's been great knowing you
 				//humanity will not forget your contribution, but now let's get this shit started.
 				//A great person deserves a great finale
-				shell_exec("cd ".dirname(__FILE__)."/last_act/ && ./decrypt_folder.sh \"$password\" ");
+				shell_exec("cd ".dirname(__FILE__)." && ./decrypt_folder.sh \"$password\" ");
 				return("FOLDER DECRYPTED");
 			} else {
 				//48h have not yet passed since the button was first pressed

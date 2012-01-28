@@ -20,9 +20,13 @@ chmod a+rw backend/timestamp_last_on.txt
 echo "-1" > backend/timestamp_last_on.txt #reset the timestamp
 chmod a+x backend/encrypt_folder.sh
 chmod a+x backend/decrypt_folder.sh
+chmod a+w backend/
 chmod a+x pandoras_box/modules/irc_message.sh
 chmod a+x pandoras_box/modules/send_email.sh
 chmod a+x pandoras_box/dont_run_me.sh
+
+rm -rf decrypted
+mkdir decrypted
 chmod a+w decrypted/
 
 
