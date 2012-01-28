@@ -59,7 +59,7 @@ function dead_man_switch($password,$state) {
 				//oh shit, you're actually dead :( i'm sorry, it's been great knowing you
 				//humanity will not forget your contribution, but now let's get this shit started.
 				//A great person deserves a great finale
-				return(shell_exec("cd ".dirname(__FILE__)."/last_act/ && ./decrypt_folder.sh ./temp_archive.tar.gpg \"$password\" 2>&1"));
+				return(shell_exec("cd ".dirname(__FILE__)."/last_act/ && ./decrypt_folder.sh ./temp_archive.tar.gpg \"$password\" "));
 			} else {
 				//48h have not yet passed since the button was first pressed
 				return("FAILSAFE PERIOD HAS NOT YET EXPIRED");
