@@ -65,7 +65,7 @@ cd ../..
 
 #save the password hash in afterlife.php
 sed -i "s/PASSWORD=\".*\";/PASSWORD=\"$hash\";/g" backend/config.php
-echo "Password hash saved in backend/afterlife.php"
+echo "Password hash saved in backend/config.php"
 
 echo "====================================================="
 echo "Installation succesfull!!!"
