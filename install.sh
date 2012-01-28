@@ -18,6 +18,8 @@ chmod a+rw backend/timestamp_last_on.txt
 echo "-1" > backend/timestamp_last_on.txt #reset the timestamp
 chmod a+x backend/last_act/encrypt_folder.sh
 chmod a+x backend/last_act/decrypt_folder.sh
+chmod a+x backend/last_act/modules/irc_message.sh
+chmod a+x backend/last_act/modules/send_email.sh
 chmod a+x backend/last_act/pandoras_box/dont_run_me.sh
 chmod a+w backend/last_act/
 
@@ -51,7 +53,7 @@ echo "Password hash = $hash"
 sed -i "s/PASSWORD=\".*\";/PASSWORD=\"$hash\";/g" backend/config.php
 echo "Password hash saved in backend/config.php"
 
-echo -ne "Enter your email:"
+echo "Enter your email:"
 read email
 
 sed -i "s/__OWNER_EMAIL=\".*\";/__OWNER_EMAIL=\"$email\";/g" backend/config.php
@@ -78,3 +80,4 @@ echo "====================================================="
 echo "Installation succesfull!!!"
 echo "====================================================="
 echo "Now you can remove the folder /backend/last-act/pandoras_box"
+echo "Be sure to configure the frontend as well."
